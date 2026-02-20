@@ -1,0 +1,252 @@
+Build a full-stack web application using Python (Flask), SQLite, Tailwind CDN (no complex frontend framework). Keep the UI simple, clean, and realistic — it should look like it was built in 2–3 hours for a hackathon. No heavy animations, no complex UI libraries.
+
+Project Name: Blockchain-Based Citizen Auditor AI (Local Civic Version)
+
+Core Concept
+
+A transparency platform connecting Citizens, Contractors, and Admin (Government). It uses:
+
+AI for report structuring and summarization
+
+A demo blockchain (hash chaining) for report immutability
+
+Role-based dashboards
+
+Public transparency ledger
+
+Tech Stack
+
+Backend: Flask
+
+Database: SQLite
+
+Frontend: HTML + Tailwind CDN
+
+Charts: Chart.js (basic usage)
+
+Hashing: SHA256
+
+Password storage: hashed
+
+AI: Use OpenAI API or mock AI functions
+
+Roles
+1️⃣ Citizen
+
+Login with email & password.
+
+Home page:
+
+“Create / Write Report” button
+
+Track report status:
+
+Report Sent
+
+Received
+
+Admin Verified
+
+Budget Allocated
+
+Contractor Selected
+
+Work Started
+
+Work Completed
+
+Feedback Submitted
+
+Create Report Page:
+
+Option 1: Manual form
+
+Option 2: AI-assisted
+AI asks:
+
+Area/Ward
+
+Complaint Type (broken road, garbage, water leakage, street light etc.)
+
+Description
+
+Estimated impact
+
+Optional fund misuse estimate
+AI generates structured civic audit report.
+
+After submission:
+
+Report stored in DB
+
+New block added to blockchain
+
+Severity score calculated using keyword-weight logic.
+
+After work completion:
+Citizen must submit rating before creating next report.
+
+2️⃣ Contractor
+
+Login with email & password.
+
+Dashboard shows:
+
+“Civic Contract Marketplace” (list of published government contracts)
+Each contract shows:
+
+Project title
+
+Location
+
+Budget
+
+Duration
+
+Required skills
+
+Apply button
+
+If selected:
+
+Can update status:
+
+Start Work
+
+Complete Work
+
+3️⃣ Admin
+
+Login with email & password.
+Admin account auto-generated password (stored hashed).
+
+Dashboard:
+
+All reports table
+
+Sort by:
+
+New
+
+Old
+
+Importance
+
+AI summary column
+
+Severity score column
+
+Assign contractor
+
+Allocate budget
+
+Change report stage
+
+Monthly analytics (Chart.js)
+
+Yearly analytics
+
+Blockchain (Demo)
+
+Each report stored as block:
+{
+id,
+timestamp,
+report_data,
+severity_score,
+previous_hash,
+current_hash
+}
+
+Hash = SHA256(all fields + previous_hash)
+
+Add “Verify Blockchain Integrity” button.
+
+If any record altered, verification fails.
+
+Ledger Page (Public Transparency)
+
+Accessible to everyone.
+Shows:
+
+All ongoing projects
+
+Allocated budget
+
+Progress %
+
+Time remaining
+
+Current status
+
+Contractor assigned
+
+Rating System
+
+After contractor marks work completed:
+Citizen must rate (1–5 stars + feedback)
+Contractor rating stored.
+
+Importance Scoring
+
+Use keyword weighted scoring:
+High:
+
+collapse
+
+danger
+
+sewage overflow
+
+contamination
+
+Medium:
+
+broken
+
+leakage
+
+garbage
+
+Low:
+
+delay
+
+slow
+
+Score = keyword_weight + urgency_weight + impact_weight + fund_weight
+
+Demo Accounts
+
+Create preloaded accounts:
+
+Citizen:
+email: citizen@test.com
+
+password: 1234
+
+Contractor:
+email: contractor@test.com
+
+password: 1234
+
+Admin:
+email: admin@test.com
+
+password: auto-generated
+
+Keep UI minimal:
+
+White background
+
+Simple navbar
+
+Card layout
+
+Basic tables
+
+No animations
+
+Clean but simple
+
+Generate full folder structure and working app.
