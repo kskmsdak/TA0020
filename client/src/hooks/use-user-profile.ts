@@ -14,7 +14,7 @@ export function useCurrentUser() {
       const res = await fetch(api.users.me.path, { credentials: "include" });
       if (res.status === 401) return null;
       if (!res.ok) throw new Error("Failed to fetch user");
-      return api.users.me.responses[200].parse(await res.json());
+      return await res.json();
     },
   });
 }

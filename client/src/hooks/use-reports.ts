@@ -18,7 +18,7 @@ export function useReports() {
     queryFn: async () => {
       const res = await fetch(api.reports.list.path, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch reports");
-      return api.reports.list.responses[200].parse(await res.json());
+      return await res.json();
     },
   });
 }
@@ -29,7 +29,7 @@ export function useMyReports() {
     queryFn: async () => {
       const res = await fetch(api.reports.listMyReports.path, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch my reports");
-      return api.reports.listMyReports.responses[200].parse(await res.json());
+      return await res.json();
     },
   });
 }
@@ -40,7 +40,7 @@ export function useAvailableContracts() {
     queryFn: async () => {
       const res = await fetch(api.reports.listAvailableContracts.path, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch contracts");
-      return api.reports.listAvailableContracts.responses[200].parse(await res.json());
+      return await res.json();
     },
   });
 }
@@ -53,7 +53,7 @@ export function useReport(id: number) {
       const res = await fetch(url, { credentials: "include" });
       if (res.status === 404) return null;
       if (!res.ok) throw new Error("Failed to fetch report");
-      return api.reports.get.responses[200].parse(await res.json());
+      return await res.json();
     },
     enabled: !!id,
   });
@@ -65,7 +65,7 @@ export function useBlockchainVerification() {
     queryFn: async () => {
       const res = await fetch(api.reports.verifyBlockchain.path, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to verify blockchain");
-      return api.reports.verifyBlockchain.responses[200].parse(await res.json());
+      return await res.json();
     },
   });
 }
@@ -85,7 +85,7 @@ export function useCreateReport() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to create report");
-      return api.reports.create.responses[201].parse(await res.json());
+      return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.reports.list.path] });
@@ -112,7 +112,7 @@ export function useGenerateAiReport() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("AI Generation failed");
-      return api.reports.generateAi.responses[200].parse(await res.json());
+      return await res.json();
     },
     onError: (err) => {
       toast({ title: "AI Error", description: err.message, variant: "destructive" });
@@ -134,7 +134,7 @@ export function useUpdateReportStatus() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to update status");
-      return api.reports.updateStatus.responses[200].parse(await res.json());
+      return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.reports.list.path] });
@@ -159,7 +159,7 @@ export function useAssignContractor() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to assign contractor");
-      return api.reports.assignContractor.responses[200].parse(await res.json());
+      return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.reports.list.path] });
@@ -182,7 +182,7 @@ export function useSubmitFeedback() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to submit feedback");
-      return api.reports.submitFeedback.responses[200].parse(await res.json());
+      return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.reports.listMyReports.path] });

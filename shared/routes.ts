@@ -58,28 +58,28 @@ export const api = {
       method: 'GET' as const,
       path: '/api/reports' as const,
       responses: {
-        200: z.array(z.custom<typeof reports.$inferSelect>()),
+        200: z.array(z.any()),
       },
     },
     listMyReports: {
       method: 'GET' as const,
       path: '/api/reports/me' as const,
       responses: {
-        200: z.array(z.custom<typeof reports.$inferSelect>()),
+        200: z.array(z.any()),
       }
     },
     listAvailableContracts: {
       method: 'GET' as const,
       path: '/api/reports/contracts' as const,
       responses: {
-        200: z.array(z.custom<typeof reports.$inferSelect>()),
+        200: z.array(z.any()),
       }
     },
     get: {
       method: 'GET' as const,
       path: '/api/reports/:id' as const,
       responses: {
-        200: z.custom<typeof reports.$inferSelect>(),
+        200: z.any(),
         404: errorSchemas.notFound,
       },
     },
