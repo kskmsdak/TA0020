@@ -71,10 +71,10 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
         <Button variant="outline" className="w-full justify-start gap-2" onClick={async () => {
           await logout();
-          window.location.href = "/role-selection";
+          window.location.href = "/";
         }}>
           <LogOut className="w-4 h-4" />
-          Log Out / Reset Role
+          Log Out
         </Button>
       </div>
     </div>
