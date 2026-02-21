@@ -69,9 +69,12 @@ export function Layout({ children }: { children: ReactNode }) {
           <p className="font-medium truncate">{userData?.user?.email}</p>
           <p className="text-xs text-muted-foreground capitalize">{role || "No Role"}</p>
         </div>
-        <Button variant="outline" className="w-full justify-start gap-2" onClick={() => logout()}>
+        <Button variant="outline" className="w-full justify-start gap-2" onClick={async () => {
+          await logout();
+          window.location.href = "/role-selection";
+        }}>
           <LogOut className="w-4 h-4" />
-          Log Out
+          Log Out / Reset Role
         </Button>
       </div>
     </div>
