@@ -65,7 +65,7 @@ Frontend:
 HTML, CSS, Bootstrap, ReactJS, JavaScript
 
 Backend:
-Node.js
+Node.js, typescript
 
 Blockchain:
 Distributed ledger for immutable records
