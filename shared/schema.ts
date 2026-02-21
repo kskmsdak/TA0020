@@ -62,6 +62,7 @@ export const reports = pgTable("reports", {
 
 export const insertReportSchema = createInsertSchema(reports).omit({
   id: true,
+  userId: true,
   timestamp: true,
   previousHash: true,
   currentHash: true,

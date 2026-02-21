@@ -99,7 +99,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {reports?.map((report) => (
+            {reports?.map((report: Report) => (
               <ReportCard 
                 key={report.id} 
                 report={report} 
