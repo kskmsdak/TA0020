@@ -56,11 +56,21 @@ export async function seedDatabase() {
   const demoReports = [
     {
       userId: citizen.id!,
+      area: "Ward 12 – Shastri Nagar",
+      complaintType: "Broken Road / Potholes",
+      description: "Severe potholes have developed on the main road near Shastri Nagar Bus Stop in Ward 12. The road was reportedly repaired 4 months ago, but due to poor construction quality, the surface has deteriorated again. During rainfall, the potholes fill with water, making them invisible and increasing the risk of accidents. Several two-wheeler riders have already slipped in this area. Local residents believe substandard materials may have been used during the previous repair work.",
+      estimatedImpact: "High – Risk of road accidents, vehicle damage, and traffic congestion.",
+      fundMisuseEstimate: "Approx. ₹8,00,000 may have been allocated for the previous repair work.",
+      severityScore: 9,
+      status: "Report Sent",
+    },
+    {
+      userId: citizen.id!,
       area: "Mumbai Ward 7",
       complaintType: "broken road",
       description: "Large pothole on Western Express Highway near Goregaon, causing major traffic jams during monsoon.",
       estimatedImpact: "High",
-      severityScore: 40,
+      severityScore: 4,
       status: "Report Sent",
     },
     {

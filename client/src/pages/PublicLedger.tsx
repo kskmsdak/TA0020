@@ -77,7 +77,7 @@ export default function PublicLedger() {
                 <th className="p-4 font-medium text-muted-foreground">Timestamp</th>
                 <th className="p-4 font-medium text-muted-foreground">Type</th>
                 <th className="p-4 font-medium text-muted-foreground">Area</th>
-                <th className="p-4 font-medium text-muted-foreground">Current Hash</th>
+                <th className="p-4 font-medium text-muted-foreground">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -89,8 +89,10 @@ export default function PublicLedger() {
                   </td>
                   <td className="p-4 font-medium">{report.complaintType}</td>
                   <td className="p-4">{report.area}</td>
-                  <td className="p-4 font-mono text-xs text-muted-foreground truncate max-w-[200px]">
-                    {report.currentHash}
+                  <td className="p-4">
+                    <span className="text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full font-medium">
+                      {report.status}
+                    </span>
                   </td>
                 </tr>
               ))}

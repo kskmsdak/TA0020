@@ -45,28 +45,20 @@ export function BlockchainVisualizer({ reports }: { reports: Report[] }) {
 
               <div className="flex items-center justify-between mb-3 border-b pb-2">
                 <span className="font-mono text-xs text-muted-foreground">Block #{block.id}</span>
-                <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-mono">
-                  SHA-256
+                <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-mono uppercase">
+                  Verified
                 </span>
               </div>
 
               <div className="space-y-2">
-                <div>
-                  <p className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">Previous Hash</p>
-                  <p className="font-mono text-[10px] text-gray-500 truncate" title={block.previousHash || "Genesis"}>
-                    {block.previousHash || "00000000000000000000"}
-                  </p>
+                <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                  <p className="text-xs font-bold text-foreground mb-1">{block.complaintType}</p>
+                  <p className="text-[10px] text-muted-foreground">{block.area}</p>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border border-gray-100">
-                  <p className="text-xs font-medium text-foreground truncate">{block.complaintType}</p>
-                  <p className="text-[10px] text-muted-foreground truncate">{block.area}</p>
-                </div>
-
-                <div>
-                  <p className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">Current Hash</p>
-                  <p className="font-mono text-[10px] text-primary truncate font-medium" title={block.currentHash || ""}>
-                    {block.currentHash}
+                <div className="pt-2">
+                  <p className="text-[10px] text-muted-foreground italic line-clamp-2">
+                    {block.aiSummary || block.description}
                   </p>
                 </div>
               </div>
