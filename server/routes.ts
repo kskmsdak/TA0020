@@ -138,7 +138,7 @@ export async function registerRoutes(
       const { prompt } = api.reports.generateAi.input.parse(req.body);
       
       const response = await openai.chat.completions.create({
-        model: "gpt-5.1",
+        model: "gpt-4o",
         response_format: { type: "json_object" },
         messages: [
           { 
