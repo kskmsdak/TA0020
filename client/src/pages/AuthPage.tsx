@@ -7,63 +7,34 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left: Branding */}
-      <div className="bg-primary p-8 lg:p-12 flex flex-col justify-between text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')] opacity-10 bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-blue-900 opacity-90" />
-        
-        <div className="relative z-10">
-          <div className="flex items-center gap-2 font-serif font-bold text-2xl">
-            <ShieldCheck className="w-8 h-8" />
-            CivicAudit
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md p-8 bg-white rounded-xl border shadow-lg text-center space-y-8">
+        <div className="flex flex-col items-center gap-4">
+          <div className="bg-primary/10 p-4 rounded-full">
+            <ShieldCheck className="w-12 h-12 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-serif font-bold text-gray-900">CivicAudit</h1>
+            <p className="text-muted-foreground">Blockchain Transparency Platform</p>
           </div>
         </div>
 
-        <div className="relative z-10 max-w-lg">
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            Transparent Governance Powered by AI & Blockchain
-          </h1>
-          <p className="text-blue-100 text-lg">
-            Empowering citizens to report issues, tracking funds immutably, and ensuring accountability in public works.
-          </p>
-        </div>
-
-        <div className="relative z-10 text-sm text-blue-200">
-          © 2025 CivicAudit Platform. All rights reserved.
-        </div>
-      </div>
-
-      {/* Right: Login CTA */}
-      <div className="bg-white p-8 lg:p-12 flex flex-col justify-center items-center">
-        <div className="w-full max-w-sm space-y-8 text-center">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-serif font-bold text-gray-900">Welcome Back</h2>
-            <p className="text-muted-foreground">Sign in to access your dashboard</p>
-          </div>
-
+        <div className="space-y-4">
+          <h2 className="text-xl font-medium text-gray-700">Welcome Back</h2>
+          <p className="text-sm text-muted-foreground">Please sign in with your Replit account to access the dashboard.</p>
           <Button 
             size="lg" 
-            className="w-full text-base h-12 shadow-xl shadow-primary/20" 
+            className="w-full text-base h-12 shadow-md hover:shadow-lg transition-all" 
             onClick={handleLogin}
           >
-            Log In or Sign Up
+            Continue to Login
           </Button>
+        </div>
 
-          <div className="grid grid-cols-3 gap-4 text-center text-xs text-muted-foreground pt-8">
-             <div>
-               <div className="font-bold text-gray-900 text-lg mb-1">AI</div>
-               Assisted Reports
-             </div>
-             <div>
-               <div className="font-bold text-gray-900 text-lg mb-1">100%</div>
-               Transparent Ledger
-             </div>
-             <div>
-               <div className="font-bold text-gray-900 text-lg mb-1">Secure</div>
-               Blockchain Record
-             </div>
-          </div>
+        <div className="pt-6 border-t grid grid-cols-3 gap-2 text-[10px] text-muted-foreground uppercase tracking-widest">
+          <div className="font-semibold">Secure</div>
+          <div className="font-semibold">Transparent</div>
+          <div className="font-semibold">Immutable</div>
         </div>
       </div>
     </div>
