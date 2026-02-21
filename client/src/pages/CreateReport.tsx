@@ -41,7 +41,20 @@ export default function CreateReport() {
   };
 
   const onSubmit = (data: any) => {
-    createReport(data, {
+    // Ensure all required fields are strings and trimmed
+    const reportData = {
+      area: String(data.area || "").trim(),
+      complaintType: String(data.complaintType || "").trim(),
+      description: String(data.description || "").trim(),
+      estimatedImpact: String(data.estimatedImpact || "").trim(),
+      fundMisuseEstimate: data.fundMisuseEstimate ? String(data.fundMisuseEstimate).trim() : null
+    };
+
+    if (!reportData.area || !reportData.complaintType || !reportData.description || !reportData.estimatedImpact) {
+      return;
+    }
+
+    createReport(reportData, {
       onSuccess: () => setLocation("/")
     });
   };

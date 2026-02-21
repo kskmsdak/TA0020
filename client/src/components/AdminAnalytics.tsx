@@ -28,39 +28,52 @@ export function AdminAnalytics({ reports }: { reports: Report[] }) {
   }));
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-64">
-      <div>
-        <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Reports by Status</h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={statusData}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={80}
-              paddingAngle={5}
-              dataKey="value"
-            >
-              {statusData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[400px]">
+      <div className="flex flex-col">
+        <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider text-center">Reports by Status</h3>
+        <div className="flex-1 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={statusData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+                dataKey="value"
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+              >
+                {statusData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
-      <div>
-        <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Avg Severity by Category</h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={severityData}>
-            <XAxis dataKey="name" fontSize={12} tickLine={false} axisLine={false} />
-            <YAxis fontSize={12} tickLine={false} axisLine={false} />
-            <Tooltip cursor={{ fill: 'transparent' }} />
-            <Bar dataKey="avgSeverity" fill="#475569" radius={[4, 4, 0, 0]} barSize={40} />
-          </BarChart>
-        </ResponsiveContainer>
+      <div className="flex flex-col">
+        <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wider text-center">Avg Severity by Category</h3>
+        <div className="flex-1 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={severityData} margin={{ bottom: 40 }}>
+              <XAxis 
+                dataKey="name" 
+                fontSize={12} 
+                tickLine={false} 
+                axisLine={false}
+                angle={-45}
+                textAnchor="end"
+                interval={0}
+              />
+              <YAxis fontSize={12} tickLine={false} axisLine={false} />
+              <Tooltip cursor={{ fill: 'transparent' }} />
+              <Bar dataKey="avgSeverity" fill="#475569" radius={[4, 4, 0, 0]} barSize={40} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

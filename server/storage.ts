@@ -87,7 +87,8 @@ export class DatabaseStorage implements IStorage {
       ...insertReport,
       severityScore: score,
       previousHash,
-      currentHash
+      currentHash,
+      status: "Report Sent"
     }).returning();
     
     return report;
