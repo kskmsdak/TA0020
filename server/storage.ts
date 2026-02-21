@@ -48,6 +48,10 @@ export class DatabaseStorage implements IStorage {
     }
   }
 
+  async clearUserProfileRole(userId: string): Promise<void> {
+    await db.delete(userProfiles).where(eq(userProfiles.userId, userId));
+  }
+
   async getAllReports(): Promise<Report[]> {
     return await db.select().from(reports).orderBy(desc(reports.timestamp));
   }

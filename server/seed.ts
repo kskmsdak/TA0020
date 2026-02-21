@@ -22,11 +22,12 @@ export async function seedDatabase() {
     
     if (!existingUser) {
       console.log(`Creating user ${u.email}...`);
-      [existingUser] = await db.insert(users).values({
+      const [newUserId] = await db.insert(users).values({
         email: u.email,
         firstName: u.firstName,
         lastName: u.lastName,
-      }).returning();
+      }).returning({ id: users.id });
+      [existingUser] = await db.select().from(users).where(eq(users.id, newUserId.id));
     }
     
     // Check/create profile

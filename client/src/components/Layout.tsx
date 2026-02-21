@@ -71,6 +71,9 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
         <Button variant="outline" className="w-full justify-start gap-2" onClick={async () => {
           await logout();
+          // Reset role by calling a reset endpoint or clearing it on the client
+          // Since we want to re-select role, we'll hit the backend to clear it
+          await fetch("/api/users/reset-role", { method: "POST" });
           window.location.href = "/";
         }}>
           <LogOut className="w-4 h-4" />

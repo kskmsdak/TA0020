@@ -50,6 +50,16 @@ export async function registerRoutes(
     }
   });
 
+  app.post("/api/users/reset-role", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      await storage.clearUserProfileRole(userId);
+      res.status(200).json({ success: true });
+    } catch (error) {
+      res.status(500).json({ message: "Internal error" });
+    }
+  });
+
   // 3. Reports API
   app.get(api.reports.list.path, isAuthenticated, async (req, res) => {
     const reports = await storage.getAllReports();

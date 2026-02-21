@@ -2,7 +2,7 @@ import { Report } from "@shared/schema";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, AlertTriangle, Activity, History } from "lucide-react";
+import { Calendar, MapPin, AlertTriangle, Activity, History, CheckCircle2, Circle } from "lucide-react";
 import { format } from "date-fns";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import { useState } from "react";
@@ -29,9 +29,54 @@ const STATUS_STEPS = [
   "Budget Allocated",
   "Contractor Selected",
   "Work Started",
-  "Work Completed",
-  "Feedback Submitted"
+  "Work Completed"
 ];
+
+const ProgressTracker = ({ currentStatus }: { currentStatus: string }) => {
+  const currentIndex = STATUS_STEPS.indexOf(currentStatus);
+  const effectiveIndex = currentIndex === -1 && currentStatus === "Feedback Submitted" 
+    ? STATUS_STEPS.length - 1 
+    : currentIndex;
+
+  return (
+    <div className="relative flex justify-between w-full mt-4 mb-8">
+      {/* Connector Line */}
+      <div className="absolute top-4 left-0 w-full h-0.5 bg-gray-200 -z-10" />
+      <div 
+        className="absolute top-4 left-0 h-0.5 bg-primary transition-all duration-500 -z-10" 
+        style={{ width: `${Math.max(0, (effectiveIndex / (STATUS_STEPS.length - 1)) * 100)}%` }}
+      />
+      
+      {STATUS_STEPS.map((step, index) => {
+        const isCompleted = index < effectiveIndex;
+        const isCurrent = index === effectiveIndex;
+        
+        return (
+          <div key={step} className="flex flex-col items-center gap-2">
+            <div className={`
+              w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white transition-colors duration-300
+              ${isCompleted || isCurrent ? "border-primary" : "border-gray-300"}
+              ${isCompleted ? "bg-primary text-white" : "text-gray-400"}
+              ${isCurrent ? "ring-4 ring-primary/20" : ""}
+            `}>
+              {isCompleted ? (
+                <CheckCircle2 className="w-5 h-5" />
+              ) : (
+                <div className={`w-2.5 h-2.5 rounded-full ${isCurrent ? "bg-primary" : "bg-gray-300"}`} />
+              )}
+            </div>
+            <span className={`
+              text-[10px] absolute -bottom-6 text-center font-medium max-w-[60px] leading-tight
+              ${isCurrent ? "text-primary font-bold" : "text-muted-foreground"}
+            `}>
+              {step}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export function ReportCard({ 
   report, 
@@ -48,9 +93,6 @@ export function ReportCard({
   const [feedback, setFeedback] = useState("");
   const [rating, setRating] = useState(5);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-
-  const currentStepIndex = STATUS_STEPS.indexOf(report.status);
-  const progress = ((currentStepIndex + 1) / STATUS_STEPS.length) * 100;
 
   const handleFeedbackSubmit = () => {
     submitFeedback({ id: report.id, rating, feedback }, {
@@ -107,21 +149,12 @@ export function ReportCard({
         )}
 
         {userRole === "citizen" && (
-          <div className="space-y-3 pt-3 border-t">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-medium flex items-center gap-1 text-primary">
-                <History className="w-3 h-3" />
-                Track Report Status
-              </span>
-              <span className="text-muted-foreground font-mono">{Math.round(progress)}%</span>
+          <div className="py-6 border-t px-1">
+            <div className="flex items-center gap-1 text-xs font-medium text-primary mb-2">
+              <History className="w-3 h-3" />
+              Track Progress
             </div>
-            <Progress value={progress} className="h-2" />
-            <div className="grid grid-cols-4 gap-1 text-[9px] uppercase tracking-tight text-center text-muted-foreground">
-              <div className={`${currentStepIndex >= 0 ? "text-primary font-bold" : ""} leading-tight`}>Sent</div>
-              <div className={`${currentStepIndex >= 2 ? "text-primary font-bold" : ""} leading-tight`}>Verified</div>
-              <div className={`${currentStepIndex >= 4 ? "text-primary font-bold" : ""} leading-tight`}>Contractor</div>
-              <div className={`${currentStepIndex >= 6 ? "text-primary font-bold" : ""} leading-tight`}>Done</div>
-            </div>
+            <ProgressTracker currentStatus={report.status} />
           </div>
         )}
 
@@ -208,7 +241,7 @@ export function ReportCard({
         )}
 
         {userRole === "citizen" && report.status !== "Work Completed" && report.status !== "Feedback Submitted" && (
-          <div className="text-[10px] text-muted-foreground italic w-full text-center">
+          <div className="text-[10px] text-muted-foreground italic w-full text-center mt-4">
             Blockchain secured tracking active
           </div>
         )}

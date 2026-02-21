@@ -17,7 +17,7 @@ export const zUserRole = z.enum(userRoles);
 // For simplicity, we'll assume the role is determined by email (e.g. admin@test.com) or we'll add a profile table.
 export const userProfiles = pgTable("user_profiles", {
   id: serial("id").primaryKey(),
-  userId: text("user_id").notNull().references(() => users.id),
+  userId: text("user_id").notNull().references(() => users.id).unique(),
   role: text("role").notNull().default("citizen"), // citizen, contractor, admin
 });
 
